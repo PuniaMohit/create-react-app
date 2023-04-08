@@ -1,4 +1,4 @@
-button{
+button {
   border-radius: 50px;
   background-color: grey;
   color: white;
@@ -6,12 +6,12 @@ button{
   height: 4vh;
 }
 
-.container{
+.container {
   width: 95%;
   margin: 0 auto;
 }
 
-.list{
+.list {
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid black;
