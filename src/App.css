@@ -26,6 +26,13 @@
   padding-left: 1%;
 }
 
+.input-red{
+  border-color:red;
+  width: 99%;
+  height: 4vh;
+  padding-left: 1%;
+}
+
 .submit {
   margin-top: 2%;
   padding: .5%;

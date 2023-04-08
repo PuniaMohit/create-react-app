@@ -4,6 +4,7 @@ import { useState } from "react";
 function App() {
   const [indexCheck, setIndexCheck] = useState([]);
   const [input, setInput] = useState("");
+  const [colorInput, setColorInput] = useState(false);
   const [list, setList] = useState(["xyz", "abc"]);
 
   let handleClick = (event, index) => {
@@ -21,8 +22,13 @@ function App() {
 
   const add = () => {
     let value = input;
-    setInput("");
-    setList((oldArray) => [...oldArray, value]);
+    if (value === "") {
+      setColorInput(true);
+    } else {
+      setColorInput(false);
+      setInput("");
+      setList((oldArray) => [...oldArray, value]);
+    }
   };
 
   return (
@@ -58,7 +64,7 @@ function App() {
       })}
       <h4>Todo</h4>
       <input
-        className="submit-input"
+        className={colorInput ? "input-red" : "submit-input"}
         type="text"
         onChange={update}
         value={input}
