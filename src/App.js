@@ -1,9 +1,10 @@
 import "./App.css";
-import tasks from "./tasks.json";
 import { useState } from "react";
 
 function App() {
   const [indexCheck, setIndexCheck] = useState([]);
+  const [input, setInput] = useState("");
+  const [list, setList] = useState(["xyz", "abc"]);
 
   let handleClick = (event, index) => {
     const { checked } = event.target;
@@ -14,40 +15,58 @@ function App() {
     }
   };
 
+  const update = (event) => {
+    setInput(event.target.value);
+  };
+
+  const add = () => {
+    let value = input;
+    setInput("");
+    setList((oldArray) => [...oldArray, value]);
+  };
+
   return (
     <div className="container">
       <h3>Todo App</h3>
-      {tasks.map((element, index) => {
+      {list.map((element, index) => {
         return (
-          <>
-            <div className="list" key={index}>
-              <div>
-                <input
-                  type="checkbox"
-                  id={index}
-                  name={index}
-                  value={element.task}
-                  onClick={(event) => {
-                    handleClick(event, index);
-                  }}
-                  key={index}
-                />
-                <label for={index}>
-                  {element.task}
-                  {index}
-                </label>
-              </div>
-              <div>
-                {indexCheck.includes(index) ? (
-                  <button variant="outline-secondary">Complete</button>
-                ) : (
-                  <></>
-                )}
-              </div>
+          <div className="list" key={index}>
+            <div>
+              <input
+                type="checkbox"
+                id={index}
+                name={index}
+                value={element.task}
+                onClick={(event) => {
+                  handleClick(event, index);
+                }}
+                key={index}
+              />
+              <label for={index}>{element}</label>
             </div>
-          </>
+            <div>
+              {indexCheck.includes(index) ? (
+                <button className="clickShowButton" variant="outline-secondary">
+                  Complete
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
         );
       })}
+      <h4>Todo</h4>
+      <input
+        className="submit-input"
+        type="text"
+        onChange={update}
+        value={input}
+        placeholder="Your Todo..."
+      />
+      <button className="submit" onClick={add}>
+        Submit
+      </button>
     </div>
   );
 }
