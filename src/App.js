@@ -15,50 +15,45 @@ function App() {
     }
   };
 
-  function update(event) {
+  const update = (event) => {
     setInput(event.target.value);
-  }
+  };
 
-  function add() {
+  const add = () => {
     let value = input;
     setInput("");
     setList((oldArray) => [...oldArray, value]);
-  }
+  };
 
   return (
     <div className="container">
       <h3>Todo App</h3>
       {list.map((element, index) => {
         return (
-          <>
-            <div className="list" key={index}>
-              <div>
-                <input
-                  type="checkbox"
-                  id={index}
-                  name={index}
-                  value={element.task}
-                  onClick={(event) => {
-                    handleClick(event, index);
-                  }}
-                  key={index}
-                />
-                <label for={index}>{element}</label>
-              </div>
-              <div>
-                {indexCheck.includes(index) ? (
-                  <button
-                    className="clickShowButton"
-                    variant="outline-secondary"
-                  >
-                    Complete
-                  </button>
-                ) : (
-                  <></>
-                )}
-              </div>
+          <div className="list" key={index}>
+            <div>
+              <input
+                type="checkbox"
+                id={index}
+                name={index}
+                value={element.task}
+                onClick={(event) => {
+                  handleClick(event, index);
+                }}
+                key={index}
+              />
+              <label for={index}>{element}</label>
             </div>
-          </>
+            <div>
+              {indexCheck.includes(index) ? (
+                <button className="clickShowButton" variant="outline-secondary">
+                  Complete
+                </button>
+              ) : (
+                <></>
+              )}
+            </div>
+          </div>
         );
       })}
       <h4>Todo</h4>
