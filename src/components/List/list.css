@@ -1,0 +1,15 @@
+.clickShowButton {
+    border-radius: 50px;
+    background-color: grey;
+    color: white;
+    border: none;
+    height: 4vh;
+  }
+  
+  .list {
+    border: 1px solid black;
+    padding-top: .5%;
+    padding-bottom: .5%;
+    display: flex;
+    justify-content: space-between;
+  }

@@ -1,41 +1,5 @@
-.clickShowButton {
-  border-radius: 50px;
-  background-color: grey;
-  color: white;
-  border: none;
-  height: 4vh;
-}
-
-.list {
-  border: 1px solid black;
-  padding-top: .5%;
-  padding-bottom: .5%;
-  display: flex;
-  justify-content: space-between;
-}
-
 .container {
   width: 95%;
   margin: 0 auto;
 }
 
-.submit-input {
-  width: 99%;
-  height: 4vh;
-  padding-left: 1%;
-}
-
-.input-red{
-  border-color:red;
-  width: 99%;
-  height: 4vh;
-  padding-left: 1%;
-}
-
-.submit {
-  margin-top: 2%;
-  padding: .5%;
-  background-color: white;
-  border: 1px solid #eaeaea;
-  border-radius: 2px;
-}
