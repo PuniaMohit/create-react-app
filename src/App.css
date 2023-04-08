@@ -10,3 +10,11 @@ button{
   width: 95%;
   margin: 0 auto;
 }
+
+.list{
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid black;
+  padding-bottom: 1%;
+  padding-top: 1%;
+}
