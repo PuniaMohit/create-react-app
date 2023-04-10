@@ -13,3 +13,11 @@
     display: flex;
     justify-content: space-between;
   }
+
+  .edit-button{
+    /* margin-right: 5%; */
+  }
+
+  .if-not-button{
+    width: 8.8vw;
+  }

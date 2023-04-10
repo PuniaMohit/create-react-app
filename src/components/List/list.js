@@ -48,7 +48,7 @@ const List = () => {
             
             {/* </div> */}
             <div>
-            <button
+            <button className="edit-button"
                 onClick={() => {
                   editTask(index);
                 }}
@@ -60,7 +60,7 @@ const List = () => {
                   Complete
                 </button>
               ) : (
-                <></>
+                <div className="if-not-button"></div>
               )}
             </div>
           </div>
