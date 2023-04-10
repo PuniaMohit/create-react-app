@@ -5,26 +5,38 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import * as Icon from "react-bootstrap-icons";
 
 const TodoList = () => {
-  const [indexCheck, setIndexCheck] = useState([]);
-  const [list, setList] = useState(["xyz", "abc"]);
+  const [list, setList] = useState([
+    { name: "xyz", complete: false },
+    { name: "abc", complete: false },
+  ]);
   const [todoTaskForEditing, setTodoTaskForEditing] = useState("");
-
-  const showTaskCompleted = (event, index) => {
+  const showTaskCompleted = (complete, index) => (event) => {
     const { checked } = event.target;
-    if (checked === true) {
-      setIndexCheck((oldArray) => [...oldArray, index]);
-    } else {
-      setIndexCheck(indexCheck.filter((item) => item !== index));
-    }
+    let newArr = list.map((item, i) => {
+      if (checked === true) {
+        if (index === i) {
+          return { ...item, [complete]: true };
+        } else {
+          return item;
+        }
+      } else {
+        if (index === i) {
+          return { ...item, [complete]: false };
+        } else {
+          return item;
+        }
+      }
+    });
+    setList(newArr);
   };
 
   const updateTodo = (value) => {
-    setList((oldArray) => [...oldArray, value]);
+    setList([...list, { name: value, complete: false }]);
   };
 
   const editTodo = (index) => {
-    const taskValue = list[index];
-    setList(list.filter((item) => item !== taskValue));
+    const taskValue = list[index].name;
+    setList(list.filter((item) => item.name !== taskValue));
     setTodoTaskForEditing(taskValue);
   };
 
@@ -38,13 +50,10 @@ const TodoList = () => {
                 type="checkbox"
                 id={index}
                 name={index}
-                value={element.task}
-                onClick={(event) => {
-                  showTaskCompleted(event, index);
-                }}
+                onClick={showTaskCompleted("complete", index)}
                 key={index}
               />
-              <label for={index}>{element}</label>
+              <label for={index}>{element.name}</label>
             </div>
             <div>
               <Icon.PencilSquare
@@ -55,7 +64,7 @@ const TodoList = () => {
               >
                 Edit
               </Icon.PencilSquare>
-              {indexCheck.includes(index) ? (
+              {element.complete ? (
                 <button className="clickShowButton">Complete</button>
               ) : (
                 <div className="if-not-button"></div>
