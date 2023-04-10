@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import "./input.css";
 
-const TodoAddTaskInput = ({ updateTodo, todoTaskForEditing, takingPresentInputValue}) => {
+const TodoAddTaskInput = ({
+  updateTodo,
+  todoTaskForEditing,
+  takingPresentInputValue,
+}) => {
   const [input, setInput] = useState("");
   const [colorAddTaskInputBorder, setColorAddTaskInputBorder] = useState(false);
 
@@ -15,7 +19,6 @@ const TodoAddTaskInput = ({ updateTodo, todoTaskForEditing, takingPresentInputVa
       updateTodo(value);
     }
   };
-
 
   useEffect(() => {
     setInput(todoTaskForEditing);
@@ -31,7 +34,7 @@ const TodoAddTaskInput = ({ updateTodo, todoTaskForEditing, takingPresentInputVa
         type="text"
         onChange={(event) => {
           setInput(event.target.value);
-          takingPresentInputValue(event.target.value)
+          takingPresentInputValue(event.target.value);
         }}
         value={input}
         placeholder="Your Todo..."
