@@ -6,10 +6,12 @@ import * as Icon from "react-bootstrap-icons";
 
 const TodoList = () => {
   const [list, setList] = useState([
-    { name: "xyz", complete: false },
-    { name: "abc", complete: false },
+    { name: "one", complete: false },
+    { name: "two", complete: false },
+    { name: "three", complete: false },
   ]);
   const [todoTaskForEditing, setTodoTaskForEditing] = useState("");
+  const [previousTaskBeforeChange, setPreviousTaskBeforeChange] = useState("")
   const showTaskCompleted = (complete, index) => (event) => {
     const { checked } = event.target;
     let newArr = list.map((item, i) => {
@@ -31,52 +33,69 @@ const TodoList = () => {
   };
 
   const updateTodo = (value) => {
-    setList([...list, { name: value, complete: false }]);
+    console.log(previousTaskBeforeChange)
+    console.log(todoTaskForEditing)
+    let newArr=list.map((element, index) => {
+      if (element.name === previousTaskBeforeChange) {
+        return {name: todoTaskForEditing, complete:false}
+            }
+      else{
+        return element
+      }
+    })
+    // setList([...list, { name: value, complete: false }]);
+    setList(newArr)
   };
+
+  console.log(list)
+
+
+  const takingPresentInputValue = (value) => {
+    setTodoTaskForEditing(value)
+  }
 
   const editTodo = (index) => {
     const taskValue = list[index].name;
-    setList(list.filter((item) => item.name !== taskValue));
+    setPreviousTaskBeforeChange(taskValue);
     setTodoTaskForEditing(taskValue);
   };
-
   return (
     <div>
       {list.map((element, index) => {
-        return (
-          <div className="list" key={index}>
-            <div>
-              <input
-                type="checkbox"
-                id={index}
-                name={index}
-                onClick={showTaskCompleted("complete", index)}
-                key={index}
-              />
-              <label for={index}>{element.name}</label>
-            </div>
-            <div>
-              <Icon.PencilSquare
-                className="edit-button"
-                onClick={() => {
-                  editTodo(index);
-                }}
-              >
-                Edit
-              </Icon.PencilSquare>
-              {element.complete ? (
-                <button className="clickShowButton">Complete</button>
-              ) : (
-                <div className="if-not-button"></div>
-              )}
-            </div>
+        return <div className="list" key={index}>
+          <div>
+            <input
+              type="checkbox"
+              id={index}
+              name={index}
+              onClick={showTaskCompleted("complete", index)}
+              key={index}
+            />
+            <label htmlFor={index}>{element.name}</label>
           </div>
-        );
-      })}
+          <div>
+            <Icon.PencilSquare
+              className="edit-button"
+              title="Edit"
+              onClick={() => {
+                editTodo(index);
+              }}
+            />
+            {element.complete ? (
+              <button className="clickShowButton">Complete</button>
+            ) : (
+              <div className="if-not-button"></div>
+            )}
+          </div>
+        </div>
+      }
+      )
+      }
       <h4>Todo</h4>
       <TodoAddTaskInput
         updateTodo={updateTodo}
         todoTaskForEditing={todoTaskForEditing}
+        takingPresentInputValue={takingPresentInputValue}
       />
     </div>
   );
