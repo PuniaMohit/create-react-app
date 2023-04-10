@@ -1,13 +1,15 @@
 import { useState } from "react";
 import "./list.css";
-import Input from "../Input/input";
+import TodoAddTaskInput from "../input/input";
+import "bootstrap/dist/css/bootstrap.min.css";
+import * as Icon from "react-bootstrap-icons";
 
-const List = () => {
+const TodoList = () => {
   const [indexCheck, setIndexCheck] = useState([]);
   const [list, setList] = useState(["xyz", "abc"]);
-  const [printInput, setPrintInput] = useState("");
+  const [todoTaskForEditing, setTodoTaskForEditing] = useState("");
 
-  let handleClick = (event, index) => {
+  const showTaskCompleted = (event, index) => {
     const { checked } = event.target;
     if (checked === true) {
       setIndexCheck((oldArray) => [...oldArray, index]);
@@ -16,14 +18,14 @@ const List = () => {
     }
   };
 
-  let updateTask = (value) => {
+  const updateTodo = (value) => {
     setList((oldArray) => [...oldArray, value]);
   };
 
-  let editTask = (index) => {
+  const editTodo = (index) => {
     const taskValue = list[index];
     setList(list.filter((item) => item !== taskValue));
-    setPrintInput(taskValue);
+    setTodoTaskForEditing(taskValue);
   };
 
   return (
@@ -38,27 +40,23 @@ const List = () => {
                 name={index}
                 value={element.task}
                 onClick={(event) => {
-                  handleClick(event, index);
+                  showTaskCompleted(event, index);
                 }}
                 key={index}
               />
               <label for={index}>{element}</label>
             </div>
-            {/* <div> */}
-            
-            {/* </div> */}
             <div>
-            <button className="edit-button"
+              <Icon.PencilSquare
+                className="edit-button"
                 onClick={() => {
-                  editTask(index);
+                  editTodo(index);
                 }}
               >
                 Edit
-              </button>
+              </Icon.PencilSquare>
               {indexCheck.includes(index) ? (
-                <button className="clickShowButton">
-                  Complete
-                </button>
+                <button className="clickShowButton">Complete</button>
               ) : (
                 <div className="if-not-button"></div>
               )}
@@ -67,9 +65,12 @@ const List = () => {
         );
       })}
       <h4>Todo</h4>
-      <Input updateTask={updateTask} printInput={printInput} />
+      <TodoAddTaskInput
+        updateTodo={updateTodo}
+        todoTaskForEditing={todoTaskForEditing}
+      />
     </div>
   );
 };
 
-export default List;
+export default TodoList;

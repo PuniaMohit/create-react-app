@@ -1,20 +1,20 @@
-.submit-input {
-    width: 99%;
-    height: 4vh;
-    padding-left: 1%;
-  }
-  
-  .input-red {
-    border-color: red;
-    width: 99%;
-    height: 4vh;
-    padding-left: 1%;
-  }
-  
-  .submit {
-    margin-top: 2%;
-    padding: .5%;
-    background-color: white;
-    border: 1px solid #eaeaea;
-    border-radius: 2px;
-  }
+.todo-addtask-input {
+  width: 99%;
+  height: 4vh;
+  padding-left: 1%;
+}
+
+.todo-addtask-input-red {
+  border-color: red;
+  width: 99%;
+  height: 4vh;
+  padding-left: 1%;
+}
+
+.submit {
+  margin-top: 2%;
+  padding: .5%;
+  background-color: white;
+  border: 1px solid #eaeaea;
+  border-radius: 2px;
+}

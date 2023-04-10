@@ -1,42 +1,44 @@
 import { useEffect, useState } from "react";
 import "./input.css";
 
-const Input = ({ updateTask, printInput }) => {
+const TodoAddTaskInput = ({ updateTodo, todoTaskForEditing }) => {
   const [input, setInput] = useState("");
-  const [colorInput, setColorInput] = useState(false);
+  const [colorAddTaskInputBorder, setColorAddTaskInputBorder] = useState(false);
 
-  const update = (event) => {
-    setInput(event.target.value);
-  };
-
-  const add = () => {
-    let value = input;
+  const addTodoTaskInInputForEditing = () => {
+    const value = input;
     if (value === "") {
-      setColorInput(true);
+      setColorAddTaskInputBorder(true);
     } else {
-      setColorInput(false);
+      setColorAddTaskInputBorder(false);
       setInput("");
-      updateTask(value);
+      updateTodo(value);
     }
   };
 
   useEffect(() => {
-    setInput(printInput);
-  }, [printInput]);
+    setInput(todoTaskForEditing);
+  }, [todoTaskForEditing]);
   return (
     <>
       <input
-        className={colorInput ? "input-red" : "submit-input"}
+        className={
+          colorAddTaskInputBorder
+            ? "todo-addtask-input-red"
+            : "todo-addtask-input"
+        }
         type="text"
-        onChange={update}
+        onChange={(event) => {
+          setInput(event.target.value);
+        }}
         value={input}
         placeholder="Your Todo..."
       />
-      <button className="submit" onClick={add}>
+      <button className="submit" onClick={addTodoTaskInInputForEditing}>
         Submit
       </button>
     </>
   );
 };
 
-export default Input;
+export default TodoAddTaskInput;
