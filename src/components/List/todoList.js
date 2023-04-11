@@ -29,7 +29,7 @@ const TodoList = () => {
     if (editingInProcess) {
       newArr = list.map((element, index) => {
         if (element.edit) {
-          return { name: value, complete: false, edit: false };
+          return { ...element, name: value,  edit: false };
         } else {
           return element;
         }
@@ -48,7 +48,7 @@ const TodoList = () => {
     setEditingInProcess(true);
     const newArr = list.map((element, index) => {
       if (taskValue === element.name) {
-        return { name: taskValue, complete: false, edit: true };
+        return { ...element, name: taskValue, edit: true };
       } else {
         return element;
       }
