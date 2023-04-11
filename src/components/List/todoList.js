@@ -25,7 +25,7 @@ const TodoList = () => {
     });
     setList(newArr);
   };
-
+  console.log(editingInProcess);
   const updateTodo = (value) => {
     let newArr = [];
     if (editingInProcess) {
@@ -47,6 +47,14 @@ const TodoList = () => {
     const taskValue = list[index].name;
     setTodoTaskForEditing(taskValue);
     setEditingInProcess(true);
+    console.log(taskValue);
+    console.log(todoTaskForEditing);
+    if (todoTaskForEditing === taskValue) {
+      setTodoTaskForEditing("");
+      setTimeout(() => {
+        setTodoTaskForEditing(taskValue);
+      }, 100);
+    }
     const newArr = list.map((element, index) => {
       if (taskValue === element.name) {
         return { ...element, name: taskValue, edit: true };

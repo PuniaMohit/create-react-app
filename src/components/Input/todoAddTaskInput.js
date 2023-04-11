@@ -17,16 +17,15 @@ const TodoAddTaskInput = ({ updateTodo, todoTaskForEditing }) => {
   };
 
   useEffect(() => {
+    console.log("hello1");
+    setIsError(false);
     setInput(todoTaskForEditing);
   }, [todoTaskForEditing]);
+
   return (
     <>
       <input
-        className={
-          isError
-            ? "todo-addtask-input-red"
-            : "todo-addtask-input"
-        }
+        className={isError ? "todo-addtask-input-red" : "todo-addtask-input"}
         type="text"
         onChange={(event) => {
           setInput(event.target.value);
