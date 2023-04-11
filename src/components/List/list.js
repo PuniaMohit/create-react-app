@@ -6,12 +6,12 @@ import * as Icon from "react-bootstrap-icons";
 
 const TodoList = () => {
   const [list, setList] = useState([
-    { name: "one", complete: false },
-    { name: "two", complete: false },
-    { name: "three", complete: false },
+    { name: "one", complete: false, edit: false },
+    { name: "two", complete: false, edit: false },
+    { name: "three", complete: false, edit: false },
   ]);
   const [todoTaskForEditing, setTodoTaskForEditing] = useState("");
-  const [previousTaskBeforeChange, setPreviousTaskBeforeChange] = useState("");
+  const [editingInProcess, setEditingInProcess] = useState(false);
   const showTaskCompleted = (complete, index) => (event) => {
     const { checked } = event.target;
     const newArr = list.map((item, i) => {
@@ -33,28 +33,34 @@ const TodoList = () => {
   };
 
   const updateTodo = (value) => {
-    console.log(previousTaskBeforeChange);
-    console.log(todoTaskForEditing);
+    let newArr = [];
+    if (editingInProcess) {
+      newArr = list.map((element, index) => {
+        if (element.edit) {
+          return { name: value, complete: false, edit: false };
+        } else {
+          return element;
+        }
+      });
+      setEditingInProcess(false);
+    } else {
+      newArr = [...list, { name: value, complete: false, edit: false }];
+    }
+    setList(newArr);
+  };
+
+  const editTodo = (index) => {
+    const taskValue = list[index].name;
+    setTodoTaskForEditing(taskValue);
+    setEditingInProcess(true);
     const newArr = list.map((element, index) => {
-      if (element.name === previousTaskBeforeChange) {
-        return { name: todoTaskForEditing, complete: false };
+      if (taskValue === element.name) {
+        return { name: taskValue, complete: false, edit: true };
       } else {
         return element;
       }
     });
     setList(newArr);
-  };
-
-  console.log(list);
-
-  const takingPresentInputValue = (value) => {
-    setTodoTaskForEditing(value);
-  };
-
-  const editTodo = (index) => {
-    const taskValue = list[index].name;
-    setPreviousTaskBeforeChange(taskValue);
-    setTodoTaskForEditing(taskValue);
   };
   return (
     <div>
@@ -92,7 +98,6 @@ const TodoList = () => {
       <TodoAddTaskInput
         updateTodo={updateTodo}
         todoTaskForEditing={todoTaskForEditing}
-        takingPresentInputValue={takingPresentInputValue}
       />
     </div>
   );
