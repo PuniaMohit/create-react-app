@@ -15,11 +15,13 @@ const TodoList = () => {
   const showTaskCompleted = (complete, index) => (event) => {
     const { checked } = event.target;
     const newArr = list.map((item, i) => {
-        if (index === i) {
-          return checked?{ ...item, [complete]: true }:{ ...item, [complete]: false }
-        } else {
-          return item;
-        }
+      if (index === i) {
+        return checked
+          ? { ...item, [complete]: true }
+          : { ...item, [complete]: false };
+      } else {
+        return item;
+      }
     });
     setList(newArr);
   };
@@ -29,11 +31,10 @@ const TodoList = () => {
     if (editingInProcess) {
       newArr = list.map((element, index) => {
         if (element.edit) {
-          return { ...element, name: value,  edit: false };
+          return { ...element, name: value, edit: false };
         } else {
           return element;
         }
-        
       });
       setEditingInProcess(false);
     } else {
@@ -50,7 +51,7 @@ const TodoList = () => {
       if (taskValue === element.name) {
         return { ...element, name: taskValue, edit: true };
       } else {
-        return element;
+        return { ...element, edit: false };
       }
     });
     setList(newArr);
