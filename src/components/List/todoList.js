@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "./list.css";
-import TodoAddTaskInput from "../input/input";
+import TodoAddTaskInput from "../input/todoAddTaskInput";
 import "bootstrap/dist/css/bootstrap.min.css";
 import * as Icon from "react-bootstrap-icons";
 
@@ -15,19 +15,11 @@ const TodoList = () => {
   const showTaskCompleted = (complete, index) => (event) => {
     const { checked } = event.target;
     const newArr = list.map((item, i) => {
-      if (checked === true) {
         if (index === i) {
-          return { ...item, [complete]: true };
+          return checked?{ ...item, [complete]: true }:{ ...item, [complete]: false }
         } else {
           return item;
         }
-      } else {
-        if (index === i) {
-          return { ...item, [complete]: false };
-        } else {
-          return item;
-        }
-      }
     });
     setList(newArr);
   };
@@ -41,6 +33,7 @@ const TodoList = () => {
         } else {
           return element;
         }
+        
       });
       setEditingInProcess(false);
     } else {

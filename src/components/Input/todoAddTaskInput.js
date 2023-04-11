@@ -3,14 +3,14 @@ import "./input.css";
 
 const TodoAddTaskInput = ({ updateTodo, todoTaskForEditing }) => {
   const [input, setInput] = useState("");
-  const [colorAddTaskInputBorder, setColorAddTaskInputBorder] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const addTodoTaskInInputForEditing = () => {
     const value = input;
     if (value === "") {
-      setColorAddTaskInputBorder(true);
+      setIsError(true);
     } else {
-      setColorAddTaskInputBorder(false);
+      setIsError(false);
       setInput("");
       updateTodo(value);
     }
@@ -23,7 +23,7 @@ const TodoAddTaskInput = ({ updateTodo, todoTaskForEditing }) => {
     <>
       <input
         className={
-          colorAddTaskInputBorder
+          isError
             ? "todo-addtask-input-red"
             : "todo-addtask-input"
         }
